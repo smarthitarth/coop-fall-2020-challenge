@@ -49,15 +49,10 @@ class EventSourcer():
 
 
     def bulk_redo(self, steps: int):
-        if self.curr_pos + steps <= len(self.memory):
-            self.curr_pos += steps
-        else:
-            self.curr_pos = len(self.memory) - 1
-        
-        if(self.curr_pos < 0):
-            self.value = self.memory[0]
-        else:
-            self.value = self.memory[self.curr_pos]
+        self.curr_pos += steps
+        if self.curr_pos + 1 >= len(self.memory):
+            self.curr_pos = len(self.memory)-1
+        self.value = self.memory[self.curr_pos]
 
         print(self.memory)
 
