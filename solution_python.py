@@ -7,21 +7,25 @@ class EventSourcer():
         self.value = 0
         self.memory = []
         self.curr_pos = 0
+        self.memory.append(self.value)
 
     def add(self, num: int):
-        self.memory.append(self.value)
         self.value += num
         self.curr_pos+=1
+        self.memory.append(self.value)
+        
+        
         print(self.memory)
 
     def subtract(self, num: int):
-        self.memory.append(self.value)
+        
         self.value -= num
         self.curr_pos+=1
+        self.memory.append(self.value)
         print(self.memory)
 
     def undo(self):
-        if self.curr_pos-1 < 0:
+        if self.curr_pos-1 <= 0:
             self.curr_pos = 0
             self.value = 0
         else:
