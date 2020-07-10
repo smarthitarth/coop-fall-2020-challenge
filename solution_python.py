@@ -21,7 +21,7 @@ class EventSourcer():
         print(self.memory)
 
     def undo(self):
-        if self.curr_pos-1 <= 0:
+        if self.curr_pos-1 < 0:
             self.curr_pos = 0
             self.value = 0
         else:
