@@ -1,23 +1,59 @@
 class EventSourcer():
     # Do not change the signature of any functions
+    
+
 
     def __init__(self):
         self.value = 0
+        self.memory = []
+        self.curr_pos = 0
 
     def add(self, num: int):
-        pass
+        self.memory.append(self.value)
+        self.value += num
+        self.curr_pos+=1
+        print(self.memory)
 
     def subtract(self, num: int):
-        pass
+        self.memory.append(self.value)
+        self.value -= num
+        self.curr_pos+=1
+        print(self.memory)
 
     def undo(self):
-        pass
+        if self.curr_pos-1 <= 0:
+            self.curr_pos = 0
+            self.value = 0
+        else:
+            self.value = self.memory[self.curr_pos-1]
+        #self.memory.append(self.curr_pos)
+        print(self.memory)
 
     def redo(self):
-        pass
+        if(self.curr_pos+1 < len(self.memory)):
+            self.curr_pos += 1
+        self.value = self.memory[self.curr_pos]
+        print(self.memory)
 
     def bulk_undo(self, steps: int):
-        pass
+        self.curr_pos -= steps
+        if(self.curr_pos < 0):
+            self.value = self.memory[0]
+        else:
+            self.value = self.memory[self.curr_pos]
+        print(self.memory)
+
 
     def bulk_redo(self, steps: int):
-        pass
+        if self.curr_pos + steps <= len(self.memory):
+            self.curr_pos += steps
+        else:
+            self.curr_pos = len(self.memory) - 1
+        
+        if(self.curr_pos < 0):
+            self.value = self.memory[0]
+        else:
+            self.value = self.memory[self.curr_pos]
+
+        print(self.memory)
+
